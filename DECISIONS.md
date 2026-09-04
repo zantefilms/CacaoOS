@@ -315,6 +315,26 @@ Configurables por tipo durante el setup:
   `supabase/email-templates/confirm-signup.html`, para pegar manualmente
   en Authentication → Emails → Templates → "Confirm signup" del dashboard
   de Supabase (no se puede aplicar por SQL/código, es config del proyecto).
+- **[2026-09] Estrategias construido (paso 4), con alcance recortado a
+  propósito**: `/estrategias` con Metas reales (`periodo`, `anual`,
+  `fondo_emergencia`) — progreso calculado de `movimientos` de verdad
+  (ahorro neto del periodo actual / del año / acumulado desde que se creó
+  la meta, según el tipo), y Gastos por tipo (Fijo/Semi-fijo/Variable) del
+  periodo actual, igual metodología que el Dashboard.
+  - **Fondo de emergencia**: la pregunta "¿tienes gastos altos
+    inesperados con frecuencia?" sugiere 3x (no) o 6x (sí) el gasto fijo
+    promedio de los últimos 3 meses — calculado de datos reales, editable
+    antes de guardar. Solo una meta activa por tipo a la vez (una nueva
+    del mismo tipo reemplaza a la anterior).
+  - **Deliberadamente NO construido, con nota visible en la pantalla en
+    vez de contenido inventado**: las "3 Estrategias del periodo"
+    (motor de recomendaciones) — DECISIONS.md ya tenía esto pospuesto
+    ("no construir un motor de reglas basado en libros todavía"); y el
+    presupuesto sugerido 50/30/20, que necesita `salario_fijo_mensual`
+    (lo captura el onboarding real, todavía no construido).
+  - Progreso de `fondo_emergencia` es una aproximación honesta (suma de
+    ahorro neto desde la creación de la meta) — no rastrea un saldo de
+    ahorro acumulado real, y la pantalla lo dice explícitamente.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
