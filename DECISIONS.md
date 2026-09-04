@@ -250,6 +250,16 @@ Configurables por tipo durante el setup:
   (nunca se confía en un valor mandado por el cliente); `estado` se guarda
   como `ok` (no `necesita_revision`) porque el usuario ya categorizó a
   mano. Rutas protegidas verificadas (redirect 307 a `/login` sin sesión).
+- **Dashboard con métricas reales construido (paso 3 del orden)**:
+  `/dashboard` calcula, desde `movimientos` de verdad — gasto/ingreso del
+  periodo, tasa de ahorro, Free money (Cashback + Intereses Financieros),
+  categoría con más gasto, y el gráfico de ingresos vs. gastos de los
+  últimos 5 meses. Deliberadamente **no** incluye calificación de hábitos ni
+  "presupuesto restante" — ambos dependen de Estrategias/Metas/Presupuestos
+  (paso 4, no construido) y de `salario_fijo_mensual` (que el onboarding
+  real, tampoco construido, es quien lo captura). Por ahora todos los
+  periodos asumen mes calendario — la lógica de `corte_dia`/quincenal se
+  conecta cuando el onboarding capture esa preferencia.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
