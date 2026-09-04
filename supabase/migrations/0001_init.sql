@@ -117,6 +117,8 @@ create table public.movimientos (
   reembolsado boolean not null default false,
   fecha_reembolso timestamptz,
   monto_reembolso numeric(12, 2),
+  posible_reembolso_pendiente boolean not null default false,
+  posible_duplicado_de uuid references public.movimientos (id),
   created_at timestamptz not null default now()
 );
 
@@ -170,6 +172,7 @@ create table public.descriptores_usuario (
   categorias_mixtas boolean not null default false,
   monto_tipico numeric(12, 2),
   veces_mismo_monto int not null default 0,
+  fecha_ultimo_monto_recurrente date,
   updated_at timestamptz not null default now(),
   unique (user_id, descriptor_normalizado)
 );
@@ -178,6 +181,31 @@ alter table public.descriptores_usuario enable row level security;
 
 create policy "descriptores all own" on public.descriptores_usuario
   for all using (user_id = auth.uid()) with check (user_id = auth.uid());
+
+-- ============================================================
+-- oauth_tokens — credenciales del correo de rastreo (Gmail/Outlook).
+-- Bloqueada por completo al cliente: ni siquiera lectura vía RLS. El
+-- bot (rol de servicio) es el único que la toca; el cliente web
+-- consulta el estado de conexión vía una llamada al backend, nunca
+-- leyendo esta tabla directo.
+-- ============================================================
+
+create table public.oauth_tokens (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references public.users (id) on delete cascade,
+  proveedor text not null check (proveedor in ('gmail', 'outlook')),
+  refresh_token_cifrado text not null,
+  scope text not null,
+  watch_expiration timestamptz,
+  subscription_id text,
+  conectado_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (user_id, proveedor)
+);
+
+alter table public.oauth_tokens enable row level security;
+-- Sin ninguna policy: RLS activo + cero policies = tabla inaccesible
+-- para cualquier rol que no sea el service_role (que bypassa RLS).
 
 -- ============================================================
 -- formatos_correos — compartida, sin datos de transacciones. Solo el rol

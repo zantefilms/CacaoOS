@@ -26,6 +26,24 @@ existente (con fecha y motivo).
   aparte).
 - Retención de correos: **48h de colchón en producción** tras extraer los datos
   (por reintentos); **7 días en Beta** para testing.
+- **[2026-09] Arquitectura confirmada** — detalle completo en
+  `docs/email-bot-architecture.md`. Resumen:
+  - Suscripción vía Gmail `watch()` (Google Cloud Pub/Sub) y Microsoft
+    Graph `subscriptions`, no polling — con jobs de renovación antes de
+    que expiren (7 días Gmail, ~3 días Graph).
+  - El bot filtra por remitente permitido (`formatos_correos`) **antes**
+    de leer el cuerpo de cualquier correo — nunca hace scan general del
+    buzón.
+  - Tokens OAuth cifrados en una tabla (`oauth_tokens`) sin ninguna
+    policy de RLS — inaccesible incluso para el propio dueño desde el
+    cliente, solo el rol de servicio del bot la toca.
+  - Cargo duplicado (mismo monto/descriptor/cuenta, ventana corta) se
+    flagea (`posible_duplicado_de`) como recomendación, nunca se
+    fusiona/borra automático.
+  - Banco no soportado o que cambió de formato: mismo flujo (usuario sube
+    PDF de ejemplo → se agrega/actualiza `formatos_correos`), disparado
+    también automáticamente cuando la tasa de extracción exitosa de un
+    formato cae por debajo de un umbral.
 
 ## Categorías
 Taxonomía v1 (fija + el usuario puede agregar propias):
@@ -52,6 +70,12 @@ recategorizable por el usuario:
 
 La detección de "monto recurrente por descriptor" se construye desde v1 (no se
 pospuso a v2).
+- **[2026-09] Algoritmo confirmado**: mismo monto (±1% de tolerancia) visto
+  2+ veces con al menos 20 días entre cada ocurrencia → se fuerza
+  `tipo_gasto = fijo` para esa categoría/descriptor, solo si la categoría
+  es `variable` por default. Vive en `descriptores_usuario.monto_tipico` /
+  `veces_mismo_monto` / `fecha_ultimo_monto_recurrente`. Detalle completo en
+  `docs/email-bot-architecture.md`.
 
 ## Presupuesto y calificación
 - Presupuesto sugerido automáticamente desde ingreso mensual con regla tipo

@@ -38,6 +38,7 @@ erDiagram
     USERS ||--o{ NOTIFICACION_PREFERENCIAS : configura
     USERS ||--o{ CALIFICACIONES_PERIODO : acumula
     USERS ||--o{ CORREOS_RECIBIDOS : recibe
+    USERS ||--o{ OAUTH_TOKENS : autoriza
     CUENTAS ||--o{ MOVIMIENTOS : origina
     CATEGORIAS ||--o{ MOVIMIENTOS : clasifica
     MOVIMIENTOS ||--o{ RECONCILIACIONES : "gasto original"
@@ -119,6 +120,8 @@ ordinarios.
 | `reembolsado` | bool | default false — si true, no cuenta en gasto del periodo |
 | `fecha_reembolso` | timestamptz, nullable | |
 | `monto_reembolso` | numeric, nullable | normalmente = `monto` |
+| `posible_reembolso_pendiente` | bool | default false — propuesta del bot, esperando confirmación del usuario (ver `docs/email-bot-architecture.md`) |
+| `posible_duplicado_de` | uuid FK → movimientos, nullable | señal para la recomendación de "cargo duplicado" |
 | `created_at` | timestamptz | |
 
 RLS: `user_id = auth.uid()`. Índice único parcial en
@@ -156,12 +159,32 @@ determinístico (sección "Predicción y autocompletado" de DECISIONS.md).
 | `categorias_mixtas` | bool | true si se ha visto con más de una categoría — fuerza "Necesita revisión" aunque `veces_visto >= 2` |
 | `monto_tipico` | numeric, nullable | último monto visto, para detección de "monto recurrente" |
 | `veces_mismo_monto` | int | default 0, +1 cuando el monto nuevo == `monto_tipico` (con tolerancia) |
+| `fecha_ultimo_monto_recurrente` | date, nullable | evita contar dos compras iguales el mismo día como "recurrencia" |
 | `updated_at` | timestamptz | |
 
 RLS: `user_id = auth.uid()`. **Nunca compartida entre usuarios** — es
 exactamente la tabla que DECISIONS.md prohíbe cruzar entre usuarios.
 
-Único constraint: `(user_id, descriptor_normalizado)`.
+Único constraint: `(user_id, descriptor_normalizado)`. Algoritmo completo
+de detección de monto recurrente en `docs/email-bot-architecture.md`.
+
+### `oauth_tokens` (credenciales del correo de rastreo)
+| Columna | Tipo | Notas |
+|---|---|---|
+| `id` | uuid PK | |
+| `user_id` | uuid FK → users | |
+| `proveedor` | text (`gmail`\|`outlook`) | |
+| `refresh_token_cifrado` | text | cifrado en reposo |
+| `scope` | text | |
+| `watch_expiration` | timestamptz, nullable | vencimiento del `watch()`/subscription activo |
+| `subscription_id` | text, nullable | id de la suscripción de Gmail Pub/Sub o Graph |
+| `conectado_at` / `updated_at` | timestamptz | |
+
+RLS: **sin ninguna policy** — con RLS activo y cero policies, la tabla
+queda inaccesible para cualquier rol que no sea el de servicio (ni
+siquiera el propio dueño la lee directo). El cliente web consulta el
+estado de conexión ("¿mi correo de rastreo está conectado?") vía una
+llamada al backend, nunca leyendo esta tabla. Único: `(user_id, proveedor)`.
 
 ### `formatos_correos` (compartida, sin datos de transacciones)
 | Columna | Tipo | Notas |
