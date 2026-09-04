@@ -297,6 +297,15 @@ Configurables por tipo durante el setup:
   - El servidor valida que la categoría elegida sea de la misma
     `direccion` que el tipo de movimiento seleccionado — nunca se confía
     en que el picker del cliente ya filtró correctamente.
+  - **[2026-09] Corregido a pantalla completa separada**: la primera
+    versión embebió el grid directo dentro del formulario; el diseño
+    original (`RegistroRapido.dc.html` + `RegistroRapido-Categoria.dc.html`)
+    es un flujo de dos pantallas — botón "Categoría" (pill con ícono +
+    nombre una vez elegida, o placeholder) que abre una vista de pantalla
+    completa con el grid, y al seleccionar regresa automático al
+    formulario. Implementado como estado de "vista" dentro del mismo
+    Client Component (no navegación de ruta real) para no perder lo ya
+    tecleado (monto, descriptor, fecha) al ir a elegir categoría.
   - **Pendiente**: preguntar en el onboarding real (Perfil) qué tipo de
     ingresos adicionales recibe el usuario y dejarlo escribir sus propias
     categorías de ingreso — se conecta cuando se construya esa pantalla
