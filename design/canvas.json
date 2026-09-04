@@ -1,0 +1,16 @@
+{
+  "artboards": [
+    { "file": "Onboarding-Auth.dc.html", "x": 0, "y": 0, "w": 390, "h": 844 },
+    { "file": "Onboarding-Perfil.dc.html", "x": 470, "y": 0, "w": 390, "h": 844 },
+    { "file": "Onboarding-Notificaciones.dc.html", "x": 940, "y": 0, "w": 390, "h": 844 },
+    { "file": "Main.dc.html", "x": 0, "y": 984, "w": 390, "h": 844 },
+    { "file": "Movimientos.dc.html", "x": 470, "y": 984, "w": 390, "h": 844 },
+    { "file": "PlanDeJuego.dc.html", "x": 940, "y": 984, "w": 390, "h": 844 },
+    { "file": "RegistroRapido.dc.html", "x": 1410, "y": 984, "w": 390, "h": 844 }
+  ],
+  "annotations": [
+    { "id": "note-onboarding", "x": 0, "y": -70, "w": 300, "text": "Onboarding — registro, perfil financiero, notificaciones" },
+    { "id": "note-core", "x": 0, "y": 914, "w": 300, "text": "Uso recurrente — Dashboard, Movimientos, Plan de Juego, Registro rápido" }
+  ],
+  "launch": { "view": "canvas" }
+}
