@@ -146,6 +146,12 @@ Configurables por tipo durante el setup:
 ## Plataforma
 iOS (iPhone) primero.
 
+## Marca
+- **[2026-09] Logo no oficial/temporal**: ilustración de una vaina de cacao
+  abierta (estilo grabado, blanco y negro), provista por el usuario, guardada
+  en `assets/logo-temporal.png`. Se usa como placeholder en el logo mark del
+  onboarding hasta que exista un logo oficial definitivo.
+
 ## Pendientes / abiertos
 - Confirmar con Plata el formato exacto de sus correos de notificación antes de
   construir el parser específico.
