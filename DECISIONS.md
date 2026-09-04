@@ -260,6 +260,25 @@ Configurables por tipo durante el setup:
   real, tampoco construido, es quien lo captura). Por ahora todos los
   periodos asumen mes calendario — la lógica de `corte_dia`/quincenal se
   conecta cuando el onboarding capture esa preferencia.
+- **[2026-09] Layout tipo app + navegación real**: toda la web app corre
+  dentro de un marco de 393px (dimensiones lógicas de iPhone 16 Pro) — a
+  ancho completo en un teléfono real, centrado con borde/sombra sutil en
+  pantallas anchas para simular el layout durante desarrollo. Pantallas
+  autenticadas (`dashboard`, `movimientos`, `registro-rapido`,
+  `estrategias`, `patrimonio`) viven bajo el route group `(app)`, con un
+  layout compartido que centraliza el check de sesión (antes duplicado por
+  pantalla) y monta la barra de navegación inferior de 5 destinos + botón
+  central de Registro rápido, igual que el diseño aprobado. Registro
+  rápido suma un botón de cerrar (X) de vuelta al dashboard. `estrategias`
+  y `patrimonio` son pantallas nuevas (la primera placeholder para el
+  paso 4 que sigue; la segunda es el "Próximamente" real del diseño para
+  Mi Patrimonio v2).
+  - **Bug de layout evitado**: la barra de navegación con `position:
+    fixed` se despega del marco simulado en pantallas anchas (se ancla a
+    la ventana del navegador, no al "teléfono"). Se resolvió con
+    `position: absolute` anclado al contenedor del marco (que lleva
+    `position: relative`) — en un teléfono real el resultado es idéntico
+    porque el marco ya ocupa el alto completo del viewport.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a

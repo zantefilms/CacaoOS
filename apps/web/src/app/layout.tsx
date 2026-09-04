@@ -26,8 +26,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${workSans.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-text font-sans">
-        {children}
+      <body className="min-h-full bg-surface-2 font-sans text-text sm:py-6">
+        {/* Marco tipo iPhone 16 Pro (393x852pt) — a ancho completo en un
+            teléfono real, centrado con borde sutil en pantallas anchas
+            para simular el layout mientras se desarrolla. */}
+        <div className="relative mx-auto flex min-h-dvh w-full max-w-[393px] flex-col overflow-hidden bg-bg sm:min-h-[852px] sm:rounded-[40px] sm:border sm:border-border sm:shadow-xl">
+          {children}
+        </div>
       </body>
     </html>
   );
