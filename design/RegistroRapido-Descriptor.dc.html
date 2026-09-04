@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+    * { box-sizing: border-box; }
+    .phone {
+      --bg: oklch(97% 0.014 75);
+      --surface: oklch(99% 0.005 80);
+      --surface-2: oklch(94% 0.02 70);
+      --border: oklch(88% 0.02 65);
+      --text: oklch(24% 0.035 45);
+      --text-muted: oklch(48% 0.028 50);
+      --text-faint: oklch(66% 0.02 55);
+      --accent: oklch(45% 0.1 45);
+      width: 390px; height: 844px; position: relative; overflow: hidden;
+      background: var(--bg); color: var(--text);
+      font-family: 'Work Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone .display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+    .top { position: absolute; top: 0; left: 0; right: 0; padding: 56px 20px 0; display: flex; align-items: center; justify-content: space-between; }
+    .closebtn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+    .body { position: absolute; top: 104px; left: 0; right: 0; padding: 0 20px; }
+    .input-card { border: 1.5px solid var(--accent); background: var(--surface); border-radius: 16px; padding: 16px 18px; font-size: 17px; font-weight: 500; min-height: 54px; display: flex; align-items: center; }
+    .cursor { display: inline-block; width: 2px; height: 18px; background: var(--accent); margin-left: 2px; vertical-align: middle; }
+    .hint { font-size: 12px; color: var(--text-faint); margin-top: 8px; line-height: 1.4; }
+    .mic-row { display: flex; flex-direction: column; align-items: center; margin-top: 30px; }
+    .mic-btn { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); color: var(--surface); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px oklch(45% 0.1 45 / 0.3); }
+    .mic-label { font-size: 12.5px; color: var(--text-muted); font-weight: 500; margin-top: 10px; }
+  </style>
+</helmet>
+<div class="phone">
+  <div class="top">
+    <h1 class="display" style="font-size: 22px; margin: 0;">Descriptor</h1>
+    <div class="closebtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="input-card">Tacos con Ana<span class="cursor"></span></div>
+    <div class="hint">Describe brevemente el gasto — "Uber al aeropuerto", "Regalo cumpleaños Sofía".</div>
+
+    <div class="mic-row">
+      <div class="mic-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><line x1="12" y1="18" x2="12" y2="21"></line></svg>
+      </div>
+      <div class="mic-label">Toca para dictar</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

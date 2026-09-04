@@ -36,11 +36,11 @@
     .seg > div.active { background: var(--accent); color: oklch(98% 0.01 60); }
     .amount { text-align: center; padding: 10px 0 22px; }
     .amount .num { font-family: 'Instrument Serif', Georgia, serif; font-size: 52px; }
-    .chiprow { display: flex; gap: 8px; overflow: hidden; margin-bottom: 18px; }
-    .chip { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--surface-2); color: var(--text-muted); white-space: nowrap; border: 1px solid transparent; }
-    .chip.active { background: oklch(93% 0.035 50); color: var(--accent); border-color: var(--accent); }
     .field { border: 1px solid var(--border); border-radius: 14px; padding: 13px 16px; font-size: 14px; margin-bottom: 12px; }
     .field .label { font-size: 11px; color: var(--text-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 3px; }
+    .pickbtn { border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .pickbtn .label { font-size: 11px; color: var(--text-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    .pickbtn .value { font-size: 14px; font-weight: 600; margin-top: 2px; }
     .btn-primary { background: var(--accent); color: oklch(98% 0.01 60); text-align: center; border-radius: 14px; padding: 16px; font-size: 15px; font-weight: 600; margin-top: 6px; }
   </style>
 </helmet>
@@ -55,7 +55,7 @@
 
     <div class="seg">
       <div class="active">Gasto en efectivo</div>
-      <div>Ingreso no ordinario</div>
+      <div>Ingreso adicional</div>
     </div>
 
     <div class="amount">
@@ -63,17 +63,27 @@
       <div style="font-size: 12px; color: var(--text-faint); margin-top: 4px;">MXN</div>
     </div>
 
-    <div class="chiprow">
-      <div class="chip active">Sin categorizar</div>
-      <div class="chip">Take-out</div>
-      <div class="chip">Super</div>
-      <div class="chip">Transporte</div>
+    <div class="row" style="gap: 10px; margin-bottom: 12px;">
+      <div class="pickbtn" style="flex: 1;">
+        <div class="row" style="gap: 8px;">
+          <span style="width: 8px; height: 8px; border-radius: 2px; background: oklch(55% 0.13 40); flex-shrink: 0;"></span>
+          <div>
+            <div class="label">Categoría</div>
+            <div class="value">Take-out</div>
+          </div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+      <div class="pickbtn" style="flex: 1;">
+        <div>
+          <div class="label">Descriptor</div>
+          <div class="value">Tacos con Ana</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
     </div>
 
-    <div class="row" style="gap: 10px;">
-      <div class="field" style="flex: 1;"><div class="label">Fecha</div>Hoy, 4 sept</div>
-      <div class="field" style="flex: 1;"><div class="label">Nota (opcional)</div>Tacos con Ana</div>
-    </div>
+    <div class="field"><div class="label">Fecha</div>Hoy, 4 sept</div>
 
     <div class="btn-primary">Guardar</div>
   </div>

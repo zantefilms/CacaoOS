@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+    * { box-sizing: border-box; }
+    .phone {
+      --bg: oklch(97% 0.014 75);
+      --surface: oklch(99% 0.005 80);
+      --surface-2: oklch(94% 0.02 70);
+      --border: oklch(88% 0.02 65);
+      --text: oklch(24% 0.035 45);
+      --text-muted: oklch(48% 0.028 50);
+      --text-faint: oklch(66% 0.02 55);
+      --accent: oklch(45% 0.1 45);
+      width: 390px; height: 844px; position: relative; overflow: hidden;
+      background: var(--bg); color: var(--text);
+      font-family: 'Work Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone .display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+    .row { display: flex; align-items: center; }
+    .top { position: absolute; top: 0; left: 0; right: 0; padding: 56px 20px 14px; display: flex; align-items: center; justify-content: space-between; }
+    .closebtn { width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+    .grid { position: absolute; top: 104px; left: 0; right: 0; bottom: 20px; padding: 0 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; align-content: start; }
+    .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); background: var(--surface); border-radius: 16px; padding: 10px 4px; text-align: center; }
+    .cell.selected { border-color: var(--accent); background: oklch(93% 0.035 50); }
+    .cell .ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .cell .lbl { font-size: 10.5px; font-weight: 600; line-height: 1.15; }
+  </style>
+</helmet>
+<div class="phone">
+  <div class="top">
+    <h1 class="display" style="font-size: 22px; margin: 0;">Categoría</h1>
+    <div class="closebtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 50);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.11 50)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13a3 3 0 0 1 0 6h-1"></path><path d="M4 8v7a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8"></path></svg></div>
+      <div class="lbl">Cafés</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 230);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 230)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="6" rx="2"></rect><circle cx="7.5" cy="17" r="1.4"></circle><circle cx="16.5" cy="17" r="1.4"></circle><path d="M5 11l2-5h10l2 5"></path></svg></div>
+      <div class="lbl">Carro</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 20);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(48% 0.13 20)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M4 9v6M20 9v6M7 7v10M17 7v10"></path></svg></div>
+      <div class="lbl">Ejercicio</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 300);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 300)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polygon points="10 8 16 12 10 16"></polygon></svg></div>
+      <div class="lbl">Entretenimiento</div>
+    </div>
+
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 10);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(48% 0.14 10)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"></rect><path d="M12 8v8M8 12h8"></path></svg></div>
+      <div class="lbl">Salud</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 80);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 80)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14"></path><path d="M6 20h8"></path><path d="M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-2-2"></path></svg></div>
+      <div class="lbl">Gasolina</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 65);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.11 65)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15.5" r="3.2"></circle><circle cx="7" cy="9" r="1.5"></circle><circle cx="17" cy="9" r="1.5"></circle><circle cx="9.5" cy="6" r="1.3"></circle><circle cx="14.5" cy="6" r="1.3"></circle></svg></div>
+      <div class="lbl">Mascota</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 265);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 265)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="8.5" cy="8.5" r="1" fill="oklch(45% 0.1 265)"></circle><circle cx="15.5" cy="15.5" r="1" fill="oklch(45% 0.1 265)"></circle><circle cx="12" cy="12" r="1" fill="oklch(45% 0.1 265)"></circle></svg></div>
+      <div class="lbl">Random</div>
+    </div>
+
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 345);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(48% 0.14 345)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1.5"></rect><path d="M4 13h16"></path><path d="M12 9v11"></path><path d="M12 9c-1.5-3-5-4-5-1.5S9.5 9 12 9zM12 9c1.5-3 5-4 5-1.5S14.5 9 12 9z"></path></svg></div>
+      <div class="lbl">Regalos</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 35);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.11 35)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v8M9 2v8M6 6h3M17 2v20M17 2c-2.5 0-4 2-4 5s1.5 5 4 5"></path></svg></div>
+      <div class="lbl">Restaurantes</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 285);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 285)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg></div>
+      <div class="lbl">Shopping Físico</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 310);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 310)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a4 4 0 0 1 8 0v2"></path></svg></div>
+      <div class="lbl">Shopping Online</div>
+    </div>
+
+    <div class="cell selected">
+      <div class="ic" style="background: oklch(88% 0.06 40);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="10" rx="2"></rect><path d="M5 9l2-4h10l2 4"></path><line x1="9" y1="13" x2="9" y2="16"></line><line x1="12" y1="13" x2="12" y2="16"></line><line x1="15" y1="13" x2="15" y2="16"></line></svg></div>
+      <div class="lbl">Take-out</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 55);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.11 55)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="9" cy="10" r="0.9" fill="oklch(45% 0.11 55)"></circle><circle cx="14" cy="9" r="0.9" fill="oklch(45% 0.11 55)"></circle><circle cx="15" cy="14" r="0.9" fill="oklch(45% 0.11 55)"></circle><circle cx="10" cy="15" r="0.9" fill="oklch(45% 0.11 55)"></circle></svg></div>
+      <div class="lbl">Snacks</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 210);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 210)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"></circle><path d="M3 20c0-3.5 3-5.5 6-5.5s6 2 6 5.5"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2c2.5.3 4.5 2 4.5 5.8"></path></svg></div>
+      <div class="lbl">Social</div>
+    </div>
+
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 255);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 255)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 4v4h-4"></path><path d="M20 12a8 8 0 0 1-14 5.3M4 20v-4h4"></path></svg></div>
+      <div class="lbl">Subscripciones</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 80);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 80)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16l-1.5 8h-13z"></path><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg></div>
+      <div class="lbl">Super</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 220);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 220)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="11" rx="2"></rect><circle cx="8" cy="19" r="1.3"></circle><circle cx="16" cy="19" r="1.3"></circle><line x1="4" y1="11" x2="20" y2="11"></line></svg></div>
+      <div class="lbl">Transporte</div>
+    </div>
+    <div class="cell">
+      <div class="ic" style="background: oklch(93% 0.05 190);"><svg width="18" height="18" viewBox="0 0 24 24" stroke="oklch(45% 0.1 190)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8-8 18-2-8-8-2z"></path></svg></div>
+      <div class="lbl">Viajes</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

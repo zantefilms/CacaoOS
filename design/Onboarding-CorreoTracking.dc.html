@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+    * { box-sizing: border-box; }
+    .phone {
+      --bg: oklch(97% 0.014 75);
+      --surface: oklch(99% 0.005 80);
+      --surface-2: oklch(94% 0.02 70);
+      --border: oklch(88% 0.02 65);
+      --text: oklch(24% 0.035 45);
+      --text-muted: oklch(48% 0.028 50);
+      --text-faint: oklch(66% 0.02 55);
+      --accent: oklch(45% 0.1 45);
+      --accent-strong: oklch(37% 0.09 45);
+      --accent-soft: oklch(93% 0.035 50);
+      --positive-strong: oklch(37% 0.09 150);
+      --positive-soft: oklch(93% 0.045 150);
+      width: 390px; height: 844px; position: relative; overflow: hidden;
+      background: var(--bg); color: var(--text);
+      font-family: 'Work Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .phone h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+    .row { display: flex; align-items: center; }
+    .top { position: absolute; top: 0; left: 0; right: 0; padding: 56px 22px 4px; background: var(--bg); z-index: 2; }
+    .progress-dots { display: flex; gap: 6px; margin-bottom: 22px; }
+    .dot { flex: 1; height: 4px; border-radius: 999px; background: var(--surface-2); }
+    .dot.done { background: var(--accent); }
+    .mid { position: absolute; top: 128px; left: 0; right: 0; bottom: 88px; overflow-y: auto; padding: 4px 22px 20px; }
+    .field-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin: 14px 0 6px; text-transform: uppercase; letter-spacing: .03em; }
+    .field { border: 1px solid var(--border); background: var(--surface); border-radius: 14px; padding: 14px 16px; font-size: 15px; }
+    .adv-card { background: var(--positive-soft); border-radius: 16px; padding: 14px 16px; margin-top: 16px; }
+    .adv-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--text); line-height: 1.4; margin-top: 8px; }
+    .adv-item:first-of-type { margin-top: 10px; }
+    .bank-row { border: 1px solid var(--border); background: var(--surface); border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; }
+    .bank-badge { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; flex-shrink: 0; }
+    .steps { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+    .step { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+    .step .n { width: 16px; height: 16px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-strong); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px 22px 30px; background: var(--bg); border-top: 1px solid var(--border); }
+    .btn-primary { background: var(--accent); color: oklch(98% 0.01 60); text-align: center; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 600; }
+  </style>
+</helmet>
+<div class="phone">
+  <div class="top">
+    <div class="progress-dots">
+      <div class="dot done"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+    <h1 style="font-size: 24px; margin: 0;">Tu correo de rastreo</h1>
+    <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Cacao lo usa solo para leer alertas bancarias.</div>
+  </div>
+
+  <div class="mid">
+    <div class="field-label">Correo a rastrear</div>
+    <div class="field">jp.cacao.alertas@gmail.com</div>
+
+    <div class="adv-card">
+      <div style="font-size: 12.5px; font-weight: 700; color: var(--positive-strong);">Por qué te recomendamos uno dedicado</div>
+      <div class="adv-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" stroke="var(--positive-strong)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Más seguro: Cacao solo abre correos que coincidan con el formato de tu banco.
+      </div>
+      <div class="adv-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" stroke="var(--positive-strong)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Tu bandeja personal queda fuera — nunca mezclamos correos.
+      </div>
+      <div class="adv-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" stroke="var(--positive-strong)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Revocas el acceso cuando quieras, sin afectar tu correo principal.
+      </div>
+    </div>
+
+    <div class="field-label" style="margin-top: 22px;">Activa las alertas por banco</div>
+
+    <div class="bank-row">
+      <div class="row" style="justify-content: space-between;">
+        <div class="row" style="gap: 10px;">
+          <div class="bank-badge" style="background: oklch(45% 0.13 25);">S</div>
+          <div style="font-size: 14px; font-weight: 600;">Santander</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">1</span>Abre la app Santander MX → Perfil → Notificaciones.</div>
+        <div class="step"><span class="n">2</span>Activa "Alertas por correo" para movimientos y compras.</div>
+        <div class="step"><span class="n">3</span>Confirma que el correo registrado sea tu correo de rastreo.</div>
+      </div>
+    </div>
+
+    <div class="bank-row">
+      <div class="row" style="justify-content: space-between;">
+        <div class="row" style="gap: 10px;">
+          <div class="bank-badge" style="background: oklch(30% 0.02 40);">Nu</div>
+          <div style="font-size: 14px; font-weight: 600;">Nu</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
+
+    <div class="bank-row">
+      <div class="row" style="justify-content: space-between;">
+        <div class="row" style="gap: 10px;">
+          <div class="bank-badge" style="background: oklch(48% 0.14 300);">Pl</div>
+          <div style="font-size: 14px; font-weight: 600;">Plata</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
+
+    <div class="bank-row" style="margin-bottom: 0;">
+      <div class="row" style="justify-content: space-between;">
+        <div class="row" style="gap: 10px;">
+          <div class="bank-badge" style="background: oklch(35% 0.1 260);">B</div>
+          <div style="font-size: 14px; font-weight: 600;">BBVA</div>
+        </div>
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--text-faint)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="btn-primary">Continuar</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,16 +1,21 @@
 {
   "artboards": [
     { "file": "Onboarding-Auth.dc.html", "x": 0, "y": 0, "w": 390, "h": 844 },
-    { "file": "Onboarding-Perfil.dc.html", "x": 470, "y": 0, "w": 390, "h": 844 },
-    { "file": "Onboarding-Notificaciones.dc.html", "x": 940, "y": 0, "w": 390, "h": 844 },
+    { "file": "Onboarding-CorreoTracking.dc.html", "x": 470, "y": 0, "w": 390, "h": 844 },
+    { "file": "Onboarding-Perfil.dc.html", "x": 940, "y": 0, "w": 390, "h": 844 },
+    { "file": "Onboarding-Notificaciones.dc.html", "x": 1410, "y": 0, "w": 390, "h": 844 },
     { "file": "Main.dc.html", "x": 0, "y": 984, "w": 390, "h": 844 },
     { "file": "Movimientos.dc.html", "x": 470, "y": 984, "w": 390, "h": 844 },
-    { "file": "PlanDeJuego.dc.html", "x": 940, "y": 984, "w": 390, "h": 844 },
-    { "file": "RegistroRapido.dc.html", "x": 1410, "y": 984, "w": 390, "h": 844 }
+    { "file": "Estrategias.dc.html", "x": 940, "y": 984, "w": 390, "h": 844 },
+    { "file": "Mi-Patrimonio.dc.html", "x": 1410, "y": 984, "w": 390, "h": 844 },
+    { "file": "RegistroRapido.dc.html", "x": 0, "y": 1968, "w": 390, "h": 844 },
+    { "file": "RegistroRapido-Categoria.dc.html", "x": 470, "y": 1968, "w": 390, "h": 844 },
+    { "file": "RegistroRapido-Descriptor.dc.html", "x": 940, "y": 1968, "w": 390, "h": 844 }
   ],
   "annotations": [
-    { "id": "note-onboarding", "x": 0, "y": -70, "w": 300, "text": "Onboarding — registro, perfil financiero, notificaciones" },
-    { "id": "note-core", "x": 0, "y": 914, "w": 300, "text": "Uso recurrente — Dashboard, Movimientos, Plan de Juego, Registro rápido" }
+    { "id": "note-onboarding", "x": 0, "y": -70, "w": 300, "text": "Onboarding — auth, correo de rastreo + tutoriales, perfil financiero, notificaciones" },
+    { "id": "note-core", "x": 0, "y": 914, "w": 300, "text": "Uso recurrente — Dashboard, Movimientos, Estrategias, Mi Patrimonio (placeholder v2)" },
+    { "id": "note-quickadd", "x": 0, "y": 1898, "w": 300, "text": "Registro rápido — monto, categoría (pantalla completa), descriptor (con dictado)" }
   ],
   "launch": { "view": "canvas" }
 }
