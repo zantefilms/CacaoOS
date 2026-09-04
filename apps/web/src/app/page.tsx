@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
 async function checkSupabase() {
@@ -22,6 +23,15 @@ async function checkSupabase() {
 
 export default async function Home() {
   const status = await checkSupabase();
+
+  let userEmail: string | null = null;
+  if (status.configured) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    userEmail = user?.email ?? null;
+  }
 
   return (
     <main className="flex-1 flex flex-col items-center justify-center gap-8 px-6 py-16 text-center">
@@ -69,6 +79,29 @@ export default async function Home() {
           </div>
         )}
       </div>
+
+      {status.configured && status.ok && (
+        <div className="text-sm">
+          {userEmail ? (
+            <>
+              <span className="text-text-muted">Sesión activa: {userEmail} — </span>
+              <Link href="/dashboard" className="font-medium text-accent">
+                Ir al dashboard
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/signup" className="font-medium text-accent">
+                Crear cuenta
+              </Link>
+              <span className="text-text-muted"> · </span>
+              <Link href="/login" className="font-medium text-accent">
+                Iniciar sesión
+              </Link>
+            </>
+          )}
+        </div>
+      )}
 
       <p className="text-xs text-text-faint">
         Ver <code className="rounded bg-surface-2 px-1 py-0.5">docs/db-schema.md</code> y{" "}

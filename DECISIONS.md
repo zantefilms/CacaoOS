@@ -217,6 +217,28 @@ Configurables por tipo durante el setup:
   visualmente ("Conectada correctamente", 23 categorías). Este es el
   proyecto de desarrollo — falta decidir cuándo/cómo se crea el de
   producción para Beta.
+- **[2026-09] Orden de construcción decidido, optimizado para atrapar bugs
+  temprano**: (1) Auth + creación de perfil, (2) Registro rápido →
+  Movimientos manual (sin el bot — ejercita el mismo esquema con menos
+  piezas móviles), (3) Dashboard/Movimientos de lectura, (4)
+  Estrategias/Metas/Presupuestos, (5) bot de correos al final (lo más
+  complejo y con más dependencias externas).
+- **Migración `0002_auth_profile_trigger.sql`**: trigger
+  `on_auth_user_created` que crea la fila de `public.users` automáticamente
+  al registrarse — sin esto, un usuario nuevo quedaría sin perfil hasta que
+  algo del lado de la app la insertara a mano. Validado contra Postgres
+  real antes de aplicarlo.
+- **Auth real construido**: `/signup`, `/login`, `/auth/callback` (confirma
+  correo y redirects de OAuth), `/dashboard` (protegida, muestra la fila de
+  `public.users` para probar que el trigger + RLS funcionan con un usuario
+  autenticado real). Apple/Google quedan wireados en código pero solo
+  funcionan cuando se activen esos providers en el dashboard de Supabase —
+  el camino probado por ahora es correo+contraseña.
+- **Bug real encontrado y corregido**: el patrón inicial de usar
+  `name="provider"` en un botón con `formAction` de Server Action no
+  funciona — React usa ese `name` internamente para codificar la acción.
+  Solución: `.bind(null, provider)` en cada botón, con la Server Action
+  recibiendo el provider como primer argumento.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
