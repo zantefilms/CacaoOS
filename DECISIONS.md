@@ -144,7 +144,12 @@ Configurables por tipo durante el setup:
 - Sin tier premium en v1.
 
 ## Plataforma
-iOS (iPhone) primero.
+- **[2026-09] v1 es web app** (responsive, uso desde iOS y Android por
+  navegador), no una app nativa. Publicarla en App Store/Play Store queda
+  como decisión post-Beta — si se hace, la ruta preferida es envolver la
+  misma web app con Capacitor en vez de reescribir nativo. Ver
+  `docs/stack-proposal.md` para el detalle y las implicaciones (sobre todo
+  en notificaciones push en iOS).
 
 ## Marca
 - **[2026-09] Logo no oficial/temporal**: ilustración de una vaina de cacao
