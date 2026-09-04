@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "./actions";
 
@@ -59,6 +60,21 @@ export default async function DashboardPage() {
             <li>Creado: {new Date(profile.created_at).toLocaleString("es-MX")}</li>
           </ul>
         )}
+      </div>
+
+      <div className="flex gap-3 text-sm">
+        <Link
+          href="/registro-rapido"
+          className="rounded-2xl bg-accent px-5 py-2.5 font-semibold text-white"
+        >
+          Registro rápido
+        </Link>
+        <Link
+          href="/movimientos"
+          className="rounded-2xl border border-border bg-surface px-5 py-2.5 font-medium text-text"
+        >
+          Ver movimientos
+        </Link>
       </div>
 
       <form action={signOut}>

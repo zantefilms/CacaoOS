@@ -239,6 +239,17 @@ Configurables por tipo durante el setup:
   funciona — React usa ese `name` internamente para codificar la acción.
   Solución: `.bind(null, provider)` en cada botón, con la Server Action
   recibiendo el provider como primer argumento.
+- **Registro rápido → Movimientos construido (paso 2 del orden)**:
+  `/registro-rapido` (form real: tipo gasto/ingreso, monto, categoría,
+  descriptor, fecha) y `/movimientos` (lista, protegida). Simplificaciones
+  deliberadas de UI vs. el diseño aprobado, a retomar como pulido visual
+  más adelante: categoría es un `<select>` en vez del grid de pantalla
+  completa, y descriptor es texto simple sin dictado por voz — el objetivo
+  de este paso era validar el modelo de datos, no la fidelidad visual.
+  `tipo_gasto` se resuelve en el servidor desde `categorias.tipo_default`
+  (nunca se confía en un valor mandado por el cliente); `estado` se guarda
+  como `ok` (no `necesita_revision`) porque el usuario ya categorizó a
+  mano. Rutas protegidas verificadas (redirect 307 a `/login` sin sesión).
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
