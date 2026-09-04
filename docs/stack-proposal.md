@@ -1,7 +1,7 @@
 # Cacao — Propuesta de stack técnico (v1)
 
-Estado: **propuesta, pendiente de tu confirmación.** Una vez la ajustemos y la
-apruebes, se registra como decisión final en `DECISIONS.md`.
+Estado: **[2026-09] confirmado.** Registrado como decisión final en
+`DECISIONS.md`.
 
 **[2026-09] Cambio de plataforma**: v1 será **web app** (responsive, usable
 desde iOS y Android por navegador), no una app nativa de iOS. Publicarla en

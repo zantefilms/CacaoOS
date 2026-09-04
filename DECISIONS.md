@@ -157,6 +157,24 @@ Configurables por tipo durante el setup:
   en `assets/logo-temporal.png`. Se usa como placeholder en el logo mark del
   onboarding hasta que exista un logo oficial definitivo.
 
+## Stack técnico
+- **[2026-09] Confirmado.** Ver `docs/stack-proposal.md` para el detalle
+  completo y la justificación de cada elección.
+  - Cliente: Next.js (React) + TypeScript, PWA responsive (iOS/Android por
+    navegador).
+  - Backend-as-a-service: Supabase — Postgres + Auth (Apple/Google/email) +
+    Row Level Security (fuerza la regla de privacidad por-usuario a nivel de
+    base de datos).
+  - Bot de correos: servicio separado en Node.js + TypeScript (Fly.io o
+    Railway), con `googleapis` (Gmail) y Microsoft Graph SDK (Outlook).
+  - Cola de background jobs: Redis + BullMQ.
+  - Notificaciones: Web Push (VAPID) — con la limitación conocida de que en
+    iOS solo funciona si el usuario agregó la app a su pantalla de inicio,
+    en iOS 16.4+. Mitigado con onboarding que empuja ese paso, más
+    "Necesita revisión" apareciendo primero en Movimientos como respaldo.
+  - Suscripciones: Stripe Billing (checkout web).
+  - ORM: Prisma o Drizzle.
+
 ## Pendientes / abiertos
 - Confirmar con Plata el formato exacto de sus correos de notificación antes de
   construir el parser específico.
