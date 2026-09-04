@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Paleta cacao/terracota — misma que design/*.dc.html (canvas aprobado) */
+:root {
+  --color-bg: oklch(97% 0.014 75);
+  --color-surface: oklch(99% 0.005 80);
+  --color-surface-2: oklch(94% 0.02 70);
+  --color-border: oklch(88% 0.02 65);
+  --color-text: oklch(24% 0.035 45);
+  --color-text-muted: oklch(48% 0.028 50);
+  --color-text-faint: oklch(66% 0.02 55);
+  --color-accent: oklch(45% 0.1 45);
+  --color-accent-strong: oklch(37% 0.09 45);
+  --color-accent-soft: oklch(93% 0.035 50);
+  --color-positive: oklch(45% 0.1 150);
+  --color-positive-strong: oklch(37% 0.09 150);
+  --color-positive-soft: oklch(93% 0.045 150);
+  --color-negative: oklch(50% 0.15 25);
+  --color-negative-soft: oklch(94% 0.05 30);
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-faint: var(--color-text-faint);
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-positive: var(--color-positive);
+  --color-positive-strong: var(--color-positive-strong);
+  --color-positive-soft: var(--color-positive-soft);
+  --color-negative: var(--color-negative);
+  --color-negative-soft: var(--color-negative-soft);
+
+  --font-sans: var(--font-work-sans), system-ui, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, serif;
+}

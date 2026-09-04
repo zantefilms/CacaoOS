@@ -199,7 +199,25 @@ Configurables por tipo durante el setup:
   - Suscripciones: Stripe Billing (checkout web).
   - ORM: Prisma o Drizzle.
 
+## Andamiaje del proyecto
+- **[2026-09]** Estructura del repo: `apps/web` (Next.js, app real) y
+  `apps/bot` (pendiente de construir — el servicio del bot de correos).
+  `supabase/` con la migración y `config.toml` para `supabase start`.
+- `apps/web` ya corre y compila (build + lint + typecheck limpios),
+  wireado a Supabase vía `@supabase/ssr`, con la paleta/tipografía del
+  canvas de diseño aplicada en `globals.css`. Todavía sin pantallas
+  completas — es andamiaje, no producto.
+- Next.js 16 renombró el archivo `middleware.ts` a `proxy.ts` (mismo
+  propósito, usado aquí para refrescar la sesión de Supabase) — si alguien
+  busca "middleware" y no lo encuentra, es por eso.
+
 ## Pendientes / abiertos
+- **Supabase local (`supabase start`) no se pudo probar en el entorno de
+  desarrollo en la nube usado para este proyecto** — requiere Docker, y ese
+  entorno tiene bloqueado el acceso a los blobs de Docker Hub (funciona el
+  API pero no la descarga de imágenes). Debería funcionar normal en una
+  máquina con Docker Desktop corriendo; si no, la alternativa sin Docker es
+  un proyecto gratis de Supabase Cloud (pasos en `apps/web/README.md`).
 - Confirmar con Plata el formato exacto de sus correos de notificación antes de
   construir el parser específico.
 - Definir precio de suscripción con datos de mercado (post-lanzamiento de Beta).
