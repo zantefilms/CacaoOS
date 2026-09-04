@@ -19,20 +19,31 @@ export async function crearMovimiento(formData: FormData) {
   const descriptor = String(formData.get("descriptor") ?? "").trim();
   const fecha = String(formData.get("fecha") ?? "");
 
-  if (!montoRaw || montoRaw <= 0 || !categoriaId || !descriptor || !fecha) {
+  if (
+    !montoRaw ||
+    montoRaw <= 0 ||
+    !categoriaId ||
+    !descriptor ||
+    !fecha ||
+    (tipoMovimiento !== "gasto" && tipoMovimiento !== "ingreso")
+  ) {
     redirect("/registro-rapido?error=" + encodeURIComponent("Faltan campos, o el monto no es válido."));
   }
 
   // El tipo_gasto se toma del default de la categoría en el servidor —
-  // nunca se confía en un valor que mande el cliente.
+  // nunca se confía en un valor que mande el cliente. También se valida
+  // que la categoría elegida sea de la misma dirección (gasto/ingreso)
+  // que el usuario seleccionó, aunque el picker del cliente ya filtre
+  // por dirección — un ingreso nunca debe poder quedar clasificado con
+  // una categoría de gasto ni viceversa.
   const { data: categoria, error: categoriaError } = await supabase
     .from("categorias")
-    .select("tipo_default")
+    .select("tipo_default, direccion")
     .eq("id", categoriaId)
     .single();
 
-  if (categoriaError || !categoria) {
-    redirect("/registro-rapido?error=" + encodeURIComponent("Categoría inválida."));
+  if (categoriaError || !categoria || categoria.direccion !== tipoMovimiento) {
+    redirect("/registro-rapido?error=" + encodeURIComponent("Categoría inválida para ese tipo de movimiento."));
   }
 
   const monto = tipoMovimiento === "ingreso" ? Math.abs(montoRaw) : -Math.abs(montoRaw);

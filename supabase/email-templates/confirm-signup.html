@@ -1,0 +1,78 @@
+<!--
+  Cacao — plantilla de correo "Confirm signup" para Supabase Auth.
+
+  Cómo aplicarla:
+  1. Dashboard de Supabase → Authentication → Emails → Templates
+     (o "Email Templates", según la versión del dashboard).
+  2. Selecciona la plantilla "Confirm signup".
+  3. Pega el contenido de este archivo (todo lo que está entre
+     <!DOCTYPE ...> y </html>, no este comentario) en el campo del
+     cuerpo del mensaje.
+  4. Cambia el "Subject heading" a algo como:
+       Confirma tu correo en Cacao
+  5. Guarda. Las variables {{ .ConfirmationURL }} las rellena Supabase
+     automáticamente — no se tocan.
+
+  Nota: el HTML de correo es más limitado que el de una página web
+  normal (sin fuentes de Google, sin CSS moderno, layout con tablas
+  para que Outlook no lo rompa) — por eso no se ve idéntico a la app,
+  pero usa la misma paleta e identidad de Cacao.
+-->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Confirma tu correo</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#F3E7D8;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F3E7D8;">
+      <tr>
+        <td align="center" style="padding:40px 20px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:420px; background-color:#FBF3E9; border:1px solid #E4D5C2; border-radius:24px;">
+            <tr>
+              <td style="padding:40px 32px; text-align:center;">
+                <div style="font-family: Georgia, 'Times New Roman', serif; font-size:30px; color:#3D2B1F; margin-bottom:6px;">
+                  Cacao
+                </div>
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:13px; color:#7A6353; margin-bottom:36px;">
+                  Entiende en qué se te va el dinero.
+                </div>
+
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:19px; font-weight:600; color:#3D2B1F; margin-bottom:10px;">
+                  Confirma tu correo
+                </div>
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:14px; line-height:1.6; color:#7A6353; margin-bottom:30px;">
+                  Un último paso para activar tu cuenta y empezar a ver en qué
+                  se te va el dinero.
+                </div>
+
+                <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                  <tr>
+                    <td style="border-radius:16px; background-color:#8B4A2E;">
+                      <a
+                        href="{{ .ConfirmationURL }}"
+                        style="display:inline-block; padding:14px 34px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:15px; font-weight:600; color:#FFFFFF; text-decoration:none; border-radius:16px;"
+                      >
+                        Confirmar correo
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:12px; line-height:1.6; color:#A8998A; margin-top:32px;">
+                  Si no creaste una cuenta en Cacao, puedes ignorar este
+                  correo con confianza.
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:11px; color:#A8998A; margin-top:20px;">
+            Cacao — finanzas personales para México
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

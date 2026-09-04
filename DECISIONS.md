@@ -279,6 +279,33 @@ Configurables por tipo durante el setup:
     `position: absolute` anclado al contenedor del marco (que lleva
     `position: relative`) — en un teléfono real el resultado es idéntico
     porque el marco ya ocupa el alto completo del viewport.
+- **[2026-09] Registro rápido: categorías de ingreso separadas de gasto +
+  picker visual**. `categorias` suma una columna `direccion`
+  (`gasto`/`ingreso`) — antes el picker ofrecía las mismas 19 categorías de
+  gasto sin importar si el usuario registraba un gasto o un ingreso
+  adicional, lo cual no tenía sentido para un ingreso. Categorías de
+  ingreso de sistema (punto de partida, editable): Freelance, Comisiones,
+  Venta, Regalo recibido, Otro ingreso. Cashback e Intereses Financieros
+  quedan `direccion = ingreso` (son dinero entrante, aunque sigan siendo
+  `es_especial` y no cuenten como ingreso "normal" en el dashboard).
+  - El toggle Gasto/Ingreso ahora recolorea todo el formulario (rojo para
+    gasto, verde para ingreso — monto, categorías, botón de guardar) para
+    que no se registre por accidente del lado equivocado.
+  - El selector de categoría pasó de `<select>` a un grid visual de
+    íconos, portado del canvas de diseño aprobado
+    (`design/RegistroRapido-Categoria.dc.html`).
+  - El servidor valida que la categoría elegida sea de la misma
+    `direccion` que el tipo de movimiento seleccionado — nunca se confía
+    en que el picker del cliente ya filtró correctamente.
+  - **Pendiente**: preguntar en el onboarding real (Perfil) qué tipo de
+    ingresos adicionales recibe el usuario y dejarlo escribir sus propias
+    categorías de ingreso — se conecta cuando se construya esa pantalla
+    (ya existe el mecanismo de categorías propias por usuario en el
+    esquema, `categorias.user_id`).
+- **[2026-09] Plantilla de correo de confirmación con marca de Cacao**:
+  `supabase/email-templates/confirm-signup.html`, para pegar manualmente
+  en Authentication → Emails → Templates → "Confirm signup" del dashboard
+  de Supabase (no se puede aplicar por SQL/código, es config del proyecto).
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
