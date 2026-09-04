@@ -210,14 +210,23 @@ Configurables por tipo durante el setup:
 - Next.js 16 renombró el archivo `middleware.ts` a `proxy.ts` (mismo
   propósito, usado aquí para refrescar la sesión de Supabase) — si alguien
   busca "middleware" y no lo encuentra, es por eso.
+- **[2026-09] Proyecto de Supabase Cloud creado y verificado de punta a
+  punta** (`Cacao-Dev`, región `us-east-1`, ref `rlmmjmgglgwmzbsonhfg`) —
+  migración `0001_init.sql` aplicada vía SQL Editor del dashboard, `apps/web`
+  corriendo local en la máquina del usuario contra ese proyecto, confirmado
+  visualmente ("Conectada correctamente", 23 categorías). Este es el
+  proyecto de desarrollo — falta decidir cuándo/cómo se crea el de
+  producción para Beta.
 
 ## Pendientes / abiertos
-- **Supabase local (`supabase start`) no se pudo probar en el entorno de
-  desarrollo en la nube usado para este proyecto** — requiere Docker, y ese
-  entorno tiene bloqueado el acceso a los blobs de Docker Hub (funciona el
-  API pero no la descarga de imágenes). Debería funcionar normal en una
-  máquina con Docker Desktop corriendo; si no, la alternativa sin Docker es
-  un proyecto gratis de Supabase Cloud (pasos en `apps/web/README.md`).
+- **Este entorno de desarrollo en la nube no tiene salida de red a
+  servicios externos fuera de un allowlist chico** (registries de paquetes:
+  npm/pip/etc.) — ni Docker Hub (para `supabase start` local) ni siquiera
+  HTTPS normal a dominios como `supabase.co` funcionan desde aquí (solo el
+  puerto 443 está abierto, y solo hacia lo permitido). Por eso el proyecto
+  de Supabase Cloud se probó desde la máquina del usuario, no desde esta
+  sesión. Cualquier integración externa futura (Stripe, Gmail API, etc.) va
+  a tener la misma limitación — hay que probarla fuera de este entorno.
 - Confirmar con Plata el formato exacto de sus correos de notificación antes de
   construir el parser específico.
 - Definir precio de suscripción con datos de mercado (post-lanzamiento de Beta).
