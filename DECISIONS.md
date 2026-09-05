@@ -306,11 +306,9 @@ Configurables por tipo durante el setup:
     formulario. Implementado como estado de "vista" dentro del mismo
     Client Component (no navegación de ruta real) para no perder lo ya
     tecleado (monto, descriptor, fecha) al ir a elegir categoría.
-  - **Pendiente**: preguntar en el onboarding real (Perfil) qué tipo de
-    ingresos adicionales recibe el usuario y dejarlo escribir sus propias
-    categorías de ingreso — se conecta cuando se construya esa pantalla
-    (ya existe el mecanismo de categorías propias por usuario en el
-    esquema, `categorias.user_id`).
+  - **Resuelto**: el onboarding real (paso Perfil) ahora pregunta qué tipo
+    de ingresos adicionales recibe el usuario y deja escribir categorías
+    propias — ver entrada de Onboarding más abajo.
 - **[2026-09] Plantilla de correo de confirmación con marca de Cacao**:
   `supabase/email-templates/confirm-signup.html`, para pegar manualmente
   en Authentication → Emails → Templates → "Confirm signup" del dashboard
@@ -335,6 +333,31 @@ Configurables por tipo durante el setup:
   - Progreso de `fondo_emergencia` es una aproximación honesta (suma de
     ahorro neto desde la creación de la meta) — no rastrea un saldo de
     ahorro acumulado real, y la pantalla lo dice explícitamente.
+- **[2026-09] Onboarding real construido**: `/onboarding`, wizard de 3
+  pasos (Perfil, Correo de rastreo, Notificaciones) que escribe todo hasta
+  el submit final y redirige a `/dashboard`. Estado de los 3 pasos vive en
+  el componente padre (`onboarding-wizard.tsx`) para no perder datos al
+  navegar entre pasos — mismo patrón que la vista de Categoría en Registro
+  rápido.
+  - **Perfil**: salario fijo mensual (obligatorio, valida `> 0`), ingreso
+    aproximado no fijo (opcional) — si es `> 0` se despliega un campo para
+    escribir categorías propias de ingreso ("Freelance", "Renta", etc.),
+    que se guardan como filas nuevas en `categorias` con
+    `direccion = 'ingreso'` y `user_id` del usuario. Cuentas a rastrear
+    (banco/nombre/tipo/terminación, agregar/quitar dinámico). Día de corte
+    del periodo (Mensual/Quincenal).
+  - **Correo de rastreo**: campo opcional por ahora, con explicación de
+    por qué conviene un correo dedicado — sin tutoriales por banco todavía
+    (queda pendiente para cuando se construya el bot).
+  - **Notificaciones**: 4 tipos con switch, todos activados por default
+    (límite de presupuesto, cierre de periodo positivo, transacción
+    desconocida, recomendaciones de la app) — insertan en
+    `notificacion_preferencias`.
+  - **Migración `0004_onboarding_completado.sql`**: agrega
+    `users.onboarding_completado boolean not null default false`.
+    `(app)/layout.tsx` ahora redirige a `/onboarding` si el usuario
+    autenticado todavía no lo completa, antes de dejarlo entrar al resto
+    de la app — el gate real que faltaba para que el flujo tuviera efecto.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a
