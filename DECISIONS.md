@@ -373,6 +373,23 @@ Configurables por tipo durante el setup:
     `(app)/layout.tsx` ahora redirige a `/onboarding` si el usuario
     autenticado todavía no lo completa, antes de dejarlo entrar al resto
     de la app — el gate real que faltaba para que el flujo tuviera efecto.
+  - **Ajustes de copy y layout**: el título de cada paso ahora siempre se
+    renderiza primero — el error de validación (cuando lo hay) aparece
+    justo debajo del título del primer paso, no arriba de todo. Se quitó
+    el mensaje genérico "Revisa tu correo de notificaciones, tu salario y
+    el día de corte." — esa rama de validación ahora redirige en
+    silencio, ya que los campos requeridos tienen `required` en el
+    cliente y los botones "Continuar" quedan deshabilitados hasta
+    llenarlos, así que llegar ahí implica manipular el form fuera de la
+    UI normal. Se agregó una explicación bajo "Día de corte del periodo"
+    de para qué sirve elegirlo (ingresos fijos y metas de ahorro).
+- **[2026-09] Iconos premium en la barra de navegación**: se agregó
+  `@tabler/icons-react` (set de íconos outline de alta calidad, estilo
+  consistente con SF Symbols) para Estrategias (`IconChessKnight`, un
+  caballo de ajedrez) y Patrimonio (`IconHome2`, una casa). El resto de
+  la barra (Inicio, Movimientos, el botón `+` de Registro rápido) se dejó
+  con los SVG dibujados a mano que ya existían, para no ampliar el scope
+  del cambio pedido.
 
 ## Pendientes / abiertos
 - **Este entorno de desarrollo en la nube no tiene salida de red a

@@ -30,10 +30,7 @@ export async function completarOnboarding(formData: FormData) {
     (corteTipo !== "mensual" && corteTipo !== "quincenal") ||
     !trackingEmail
   ) {
-    redirect(
-      "/onboarding?error=" +
-        encodeURIComponent("Revisa tu correo de notificaciones, tu salario y el día de corte."),
-    );
+    redirect("/onboarding");
   }
 
   let cuentas: Cuenta[] = [];

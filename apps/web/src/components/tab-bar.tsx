@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { IconChessKnight, IconHome2 } from "@tabler/icons-react";
 
 const items = [
   {
@@ -18,25 +19,6 @@ const items = [
   },
 ] as const;
 
-const itemsRight = [
-  {
-    href: "/estrategias",
-    label: "Estrategias",
-    icon: <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3.5" /></>,
-  },
-  {
-    href: "/patrimonio",
-    label: "Patrimonio",
-    icon: (
-      <>
-        <path d="M12 20V10" />
-        <path d="M12 10c-4 0-6-3-6-6 4 0 6 2 6 6z" />
-        <path d="M12 10c4 0 6-3 6-6-4 0-6 2-6 6z" />
-      </>
-    ),
-  },
-] as const;
-
 function TabLink({ href, label, icon, active }: { href: string; label: string; icon: React.ReactNode; active: boolean }) {
   return (
     <Link
@@ -46,6 +28,28 @@ function TabLink({ href, label, icon, active }: { href: string; label: string; i
       <svg width="21" height="21" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
         {icon}
       </svg>
+      {label}
+    </Link>
+  );
+}
+
+function TabIconLink({
+  href,
+  label,
+  Icon,
+  active,
+}: {
+  href: string;
+  label: string;
+  Icon: typeof IconChessKnight;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`flex flex-col items-center gap-0.5 text-[9.5px] font-medium ${active ? "text-accent" : "text-text-faint"}`}
+    >
+      <Icon size={21} stroke={1.75} />
       {label}
     </Link>
   );
@@ -69,9 +73,8 @@ export function TabBar() {
           <line x1="5" y1="12" x2="19" y2="12" />
         </svg>
       </Link>
-      {itemsRight.map((item) => (
-        <TabLink key={item.href} {...item} active={pathname === item.href} />
-      ))}
+      <TabIconLink href="/estrategias" label="Estrategias" Icon={IconChessKnight} active={pathname === "/estrategias"} />
+      <TabIconLink href="/patrimonio" label="Patrimonio" Icon={IconHome2} active={pathname === "/patrimonio"} />
     </nav>
   );
 }

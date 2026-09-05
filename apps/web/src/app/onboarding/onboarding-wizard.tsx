@@ -109,10 +109,6 @@ export function OnboardingWizard({
       <div className="mx-auto w-full max-w-sm">
         <ProgressDots step={step} total={3} />
 
-        {error && (
-          <p className="mb-4 rounded-xl bg-negative-soft px-3 py-2 text-sm text-negative">{error}</p>
-        )}
-
         <form action={action}>
           {/* Campos que persisten aunque cambies de paso — el estado vive
               aquí arriba, así que ningún dato se pierde al navegar. */}
@@ -131,6 +127,11 @@ export function OnboardingWizard({
           {step === 0 && (
             <div>
               <h1 className="font-display text-2xl">Cómo funciona Cacao</h1>
+
+              {error && (
+                <p className="mt-3 rounded-xl bg-negative-soft px-3 py-2 text-sm text-negative">{error}</p>
+              )}
+
               <p className="mt-1 mb-5 text-sm text-text-muted">
                 Cada vez que haces un movimiento, tu banco te manda una notificación por correo.
                 Cacao lee esas notificaciones y registra tus gastos e ingresos por ti, sin que
@@ -200,6 +201,10 @@ export function OnboardingWizard({
 
               <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-text-faint">
                 Día de corte del periodo
+              </p>
+              <p className="mb-2 text-[11px] text-text-faint">
+                El periodo es cada cuando Cacao checa por ingresos fijos y calcula metas de
+                ahorro, así que elige si ganas dinero de manera quincenal o mensualmente.
               </p>
               <div className="mb-4 flex rounded-2xl border border-border p-1">
                 {(["mensual", "quincenal"] as const).map((t) => (
