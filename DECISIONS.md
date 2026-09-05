@@ -334,21 +334,36 @@ Configurables por tipo durante el setup:
     ahorro neto desde la creación de la meta) — no rastrea un saldo de
     ahorro acumulado real, y la pantalla lo dice explícitamente.
 - **[2026-09] Onboarding real construido**: `/onboarding`, wizard de 3
-  pasos (Perfil, Correo de rastreo, Notificaciones) que escribe todo hasta
-  el submit final y redirige a `/dashboard`. Estado de los 3 pasos vive en
-  el componente padre (`onboarding-wizard.tsx`) para no perder datos al
-  navegar entre pasos — mismo patrón que la vista de Categoría en Registro
-  rápido.
-  - **Perfil**: salario fijo mensual (obligatorio, valida `> 0`), ingreso
-    aproximado no fijo (opcional) — si es `> 0` se despliega un campo para
-    escribir categorías propias de ingreso ("Freelance", "Renta", etc.),
-    que se guardan como filas nuevas en `categorias` con
-    `direccion = 'ingreso'` y `user_id` del usuario. Cuentas a rastrear
-    (banco/nombre/tipo/terminación, agregar/quitar dinámico). Día de corte
-    del periodo (Mensual/Quincenal).
-  - **Correo de rastreo**: campo opcional por ahora, con explicación de
-    por qué conviene un correo dedicado — sin tutoriales por banco todavía
-    (queda pendiente para cuando se construya el bot).
+  pasos que escribe todo hasta el submit final y redirige a `/dashboard`.
+  Estado de los 3 pasos vive en el componente padre (`onboarding-wizard.tsx`)
+  para no perder datos al navegar entre pasos — mismo patrón que la vista
+  de Categoría en Registro rápido.
+  - **Orden final: Cómo funciona Cacao → Cuéntanos de tus finanzas →
+    Notificaciones.** El correo va primero y es obligatorio (no opcional):
+    es la pieza más importante de la app — sin él, Cacao no puede
+    registrar movimientos de forma automática. Se evitó la palabra
+    "rastreo" en toda la UI (antes "correo de rastreo", ahora "correo
+    para tus notificaciones bancarias").
+  - **Cómo funciona Cacao** (antes "Tu correo de rastreo"): explica que
+    cada movimiento genera una notificación bancaria por correo y que
+    Cacao la lee para registrar el gasto/ingreso solo. Incluye un tip por
+    banco (Santander/Nu/Plata/BBVA/Otro) de dónde activar esas
+    notificaciones — redactado en términos genéricos ("busca
+    Notificaciones o Alertas... el nombre exacto varía") porque todavía
+    no está confirmado el paso a paso real de cada banco. Recomienda
+    asignar las notificaciones de todos los bancos al mismo correo que se
+    captura aquí.
+  - **Cuéntanos de tus finanzas** (antes "Perfil"): ahora el Día de corte
+    del periodo (Mensual/Quincenal) va primero, porque el campo de
+    "Salario fijo por periodo" (renombrado desde "mensual") depende de esa
+    elección. Luego ingreso aproximado no fijo (opcional) — si es `> 0` se
+    despliega el campo para escribir categorías propias de ingreso
+    ("Freelance", "Renta", etc.), que se guardan como filas nuevas en
+    `categorias` con `direccion = 'ingreso'` y `user_id` del usuario.
+    Después "Registrar Cuentas" (antes "Cuentas a rastrear"): banco,
+    nombre y tipo por cuenta — se quitó el campo de últimos 4 dígitos, eso
+    lo va a obtener el Sweeper directo de los correos, no hace falta
+    pedirlo en el onboarding.
   - **Notificaciones**: 4 tipos con switch, todos activados por default
     (límite de presupuesto, cierre de periodo positivo, transacción
     desconocida, recomendaciones de la app) — insertan en

@@ -12,6 +12,14 @@ const BANCOS = [
   { value: "otro", label: "Otro" },
 ];
 
+const BANCO_TIPS: Record<string, string> = {
+  santander: "En la app de Santander México, busca Configuración o Notificaciones y activa los avisos por correo de cada movimiento.",
+  nu: "En la app de Nu, ve a tu perfil y busca la sección de Notificaciones para activar los avisos por correo.",
+  plata: "En Plata, activa las alertas por correo desde Ajustes → Notificaciones.",
+  bbva: "En BBVA México, activa las notificaciones por correo desde Configuración → Notificaciones dentro de la app.",
+  otro: "Busca la sección de Notificaciones o Alertas en la app o el portal de tu banco, y activa los avisos por correo electrónico de cada movimiento.",
+};
+
 const NOTIF_TIPOS = [
   {
     tipo: "limite_presupuesto",
@@ -57,6 +65,8 @@ export function OnboardingWizard({
 }) {
   const [step, setStep] = useState(0);
 
+  const [trackingEmail, setTrackingEmail] = useState("");
+  const [corteTipo, setCorteTipo] = useState<"mensual" | "quincenal">("mensual");
   const [salarioFijo, setSalarioFijo] = useState("");
   const [ingresoNoFijo, setIngresoNoFijo] = useState("");
   const [categoriasIngreso, setCategoriasIngreso] = useState<string[]>([]);
@@ -64,8 +74,6 @@ export function OnboardingWizard({
   const [cuentas, setCuentas] = useState<Cuenta[]>([
     { banco: "santander", nombre: "", tipo: "debito", terminacion: "" },
   ]);
-  const [corteTipo, setCorteTipo] = useState<"mensual" | "quincenal">("mensual");
-  const [trackingEmail, setTrackingEmail] = useState("");
   const [notifs, setNotifs] = useState<Record<string, boolean>>(
     Object.fromEntries(NOTIF_TIPOS.map((n) => [n.tipo, true])),
   );
@@ -93,6 +101,7 @@ export function OnboardingWizard({
     setCuentas(cuentas.filter((_, idx) => idx !== i));
   }
 
+  const correoValido = trackingEmail.trim().length > 0;
   const salarioValido = Number(salarioFijo) > 0;
 
   return (
@@ -121,13 +130,92 @@ export function OnboardingWizard({
 
           {step === 0 && (
             <div>
+              <h1 className="font-display text-2xl">Cómo funciona Cacao</h1>
+              <p className="mt-1 mb-5 text-sm text-text-muted">
+                Cada vez que haces un movimiento, tu banco te manda una notificación por correo.
+                Cacao lee esas notificaciones y registra tus gastos e ingresos por ti, sin que
+                tengas que hacerlo a mano.
+              </p>
+
+              <div className="mb-5 rounded-2xl bg-negative-soft p-4">
+                <p className="text-xs text-negative">
+                  Sin un correo activo, Cacao no puede registrar tus movimientos de forma
+                  automática — tendrías que capturar todo manualmente en Registro Rápido. Por eso
+                  este paso es el más importante de la configuración.
+                </p>
+              </div>
+
+              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-text-faint">
+                Correo para tus notificaciones bancarias
+              </label>
+              <input
+                type="email"
+                required
+                value={trackingEmail}
+                onChange={(e) => setTrackingEmail(e.target.value)}
+                placeholder="tu.alertas@gmail.com"
+                className="mb-4 w-full rounded-2xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-accent"
+              />
+
+              <div className="mb-5 rounded-2xl bg-surface p-4">
+                <p className="mb-2 text-xs font-bold text-text">Activa las notificaciones por banco</p>
+                <p className="mb-3 text-[11px] text-text-faint">
+                  El nombre exacto de la sección puede variar según tu banco y la versión de su
+                  app — busca &quot;Notificaciones&quot; o &quot;Alertas&quot;.
+                </p>
+                <ul className="space-y-2 text-xs text-text">
+                  {BANCOS.map((b) => (
+                    <li key={b.value}>
+                      <span className="font-semibold">{b.label}: </span>
+                      {BANCO_TIPS[b.value]}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mb-6 rounded-2xl bg-positive-soft p-4">
+                <p className="text-xs text-positive-strong">
+                  Si tienes cuentas en varios bancos, asigna las notificaciones de todos al mismo
+                  correo que pongas aquí — así Cacao las lee todas en un solo lugar.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                disabled={!correoValido}
+                onClick={() => setStep(1)}
+                className="w-full rounded-2xl bg-accent px-4 py-3 text-sm font-semibold text-white disabled:opacity-40"
+              >
+                Continuar
+              </button>
+            </div>
+          )}
+
+          {step === 1 && (
+            <div>
               <h1 className="font-display text-2xl">Cuéntanos de tus finanzas</h1>
               <p className="mt-1 mb-5 text-sm text-text-muted">
                 Esto nos ayuda a armar tu presupuesto y tus metas.
               </p>
 
+              <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-text-faint">
+                Día de corte del periodo
+              </p>
+              <div className="mb-4 flex rounded-2xl border border-border p-1">
+                {(["mensual", "quincenal"] as const).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setCorteTipo(t)}
+                    className={`flex-1 rounded-xl py-2 text-sm font-semibold capitalize ${corteTipo === t ? "bg-accent text-white" : "text-text-muted"}`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+
               <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-text-faint">
-                Salario fijo mensual
+                Salario fijo por periodo
               </label>
               <input
                 type="number"
@@ -139,7 +227,8 @@ export function OnboardingWizard({
                 className="mb-1 w-full rounded-2xl border border-border bg-surface px-4 py-3 text-lg outline-none focus:border-accent"
               />
               <p className="mb-4 text-[11px] text-text-faint">
-                Lo que recibes cada mes de forma segura (nómina, honorarios fijos).
+                Lo que recibes de forma segura en cada periodo {corteTipo === "quincenal" ? "quincenal" : "mensual"}{" "}
+                (nómina, honorarios fijos).
               </p>
 
               <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-text-faint">
@@ -155,7 +244,7 @@ export function OnboardingWizard({
               />
               <p className="mb-4 text-[11px] text-text-faint">
                 Solo como referencia para tu presupuesto — cada ingreso extra real lo registras en
-                Registro rápido, o lo confirmas cuando el bot lo detecte.
+                Registro Rápido, o lo confirmas cuando Cacao lo detecte.
               </p>
 
               {Number(ingresoNoFijo) > 0 && (
@@ -203,8 +292,12 @@ export function OnboardingWizard({
                 </div>
               )}
 
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-text-faint">
-                Cuentas a rastrear
+              <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-text-faint">
+                Registrar Cuentas
+              </p>
+              <p className="mb-2 text-[11px] text-text-faint">
+                Agrega las cuentas de las tarjetas que utilices más, ya sea para gastos o
+                ingresos, dale un nombre a cada cuenta.
               </p>
               {cuentas.map((c, i) => (
                 <div key={i} className="mb-2 flex items-center gap-1.5">
@@ -234,14 +327,6 @@ export function OnboardingWizard({
                     <option value="debito">Débito</option>
                     <option value="credito">Crédito</option>
                   </select>
-                  <input
-                    type="text"
-                    placeholder="0000"
-                    maxLength={4}
-                    value={c.terminacion}
-                    onChange={(e) => actualizarCuenta(i, "terminacion", e.target.value.replace(/\D/g, ""))}
-                    className="w-12 rounded-lg border border-border bg-surface px-2 py-2 text-xs outline-none"
-                  />
                   <button
                     type="button"
                     onClick={() => quitarCuenta(i)}
@@ -255,67 +340,10 @@ export function OnboardingWizard({
               <button
                 type="button"
                 onClick={agregarCuenta}
-                className="mb-4 text-sm font-semibold text-accent"
+                className="mb-6 text-sm font-semibold text-accent"
               >
                 + Agregar cuenta
               </button>
-
-              <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-text-faint">
-                Día de corte del periodo
-              </p>
-              <div className="mb-6 flex rounded-2xl border border-border p-1">
-                {(["mensual", "quincenal"] as const).map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setCorteTipo(t)}
-                    className={`flex-1 rounded-xl py-2 text-sm font-semibold capitalize ${corteTipo === t ? "bg-accent text-white" : "text-text-muted"}`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                disabled={!salarioValido}
-                onClick={() => setStep(1)}
-                className="w-full rounded-2xl bg-accent px-4 py-3 text-sm font-semibold text-white disabled:opacity-40"
-              >
-                Continuar
-              </button>
-            </div>
-          )}
-
-          {step === 1 && (
-            <div>
-              <h1 className="font-display text-2xl">Tu correo de rastreo</h1>
-              <p className="mt-1 mb-5 text-sm text-text-muted">
-                Cacao lo usa solo para leer alertas bancarias — recomendamos uno dedicado,
-                distinto al que usas para iniciar sesión.
-              </p>
-
-              <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-text-faint">
-                Correo a rastrear (opcional por ahora)
-              </label>
-              <input
-                type="email"
-                value={trackingEmail}
-                onChange={(e) => setTrackingEmail(e.target.value)}
-                placeholder="tu.alertas@gmail.com"
-                className="mb-4 w-full rounded-2xl border border-border bg-surface px-4 py-3 text-sm outline-none focus:border-accent"
-              />
-
-              <div className="mb-6 rounded-2xl bg-positive-soft p-4">
-                <p className="mb-2 text-xs font-bold text-positive-strong">
-                  Por qué te recomendamos uno dedicado
-                </p>
-                <ul className="space-y-1.5 text-xs text-text">
-                  <li>• Más seguro: Cacao solo abre correos que coincidan con tu banco.</li>
-                  <li>• Tu bandeja personal queda fuera — nunca mezclamos correos.</li>
-                  <li>• Revocas el acceso cuando quieras, sin afectar tu correo principal.</li>
-                </ul>
-              </div>
 
               <div className="flex gap-3">
                 <button
@@ -327,8 +355,9 @@ export function OnboardingWizard({
                 </button>
                 <button
                   type="button"
+                  disabled={!salarioValido}
                   onClick={() => setStep(2)}
-                  className="flex-1 rounded-2xl bg-accent py-3 text-sm font-semibold text-white"
+                  className="flex-1 rounded-2xl bg-accent py-3 text-sm font-semibold text-white disabled:opacity-40"
                 >
                   Continuar
                 </button>

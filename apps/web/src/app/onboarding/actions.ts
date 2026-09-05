@@ -24,8 +24,16 @@ export async function completarOnboarding(formData: FormData) {
   const categoriasIngresoRaw = String(formData.get("categorias_ingreso") ?? "[]");
   const notifTipos = formData.getAll("notif_tipo").map(String);
 
-  if (!salarioFijo || salarioFijo <= 0 || (corteTipo !== "mensual" && corteTipo !== "quincenal")) {
-    redirect("/onboarding?error=" + encodeURIComponent("Revisa tu salario fijo mensual y el día de corte."));
+  if (
+    !salarioFijo ||
+    salarioFijo <= 0 ||
+    (corteTipo !== "mensual" && corteTipo !== "quincenal") ||
+    !trackingEmail
+  ) {
+    redirect(
+      "/onboarding?error=" +
+        encodeURIComponent("Revisa tu correo de notificaciones, tu salario y el día de corte."),
+    );
   }
 
   let cuentas: Cuenta[] = [];
