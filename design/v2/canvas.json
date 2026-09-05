@@ -18,7 +18,7 @@
       "x": 0,
       "y": -230,
       "w": 1350,
-      "text": "Tres opciones de layout para Inicio, Movimientos y Estrategias.\n\nLo que NO cambia entre opciones: la paleta exacta de la app (mismos tokens oklch de globals.css), Instrument Serif para títulos, Work Sans para el resto, el mismo contenido de cada pantalla, y el caballo de ajedrez en Estrategias + la casa en Patrimonio.\n\nLo que cambia: la estructura de cada pantalla y el tratamiento de la iconografía (grosor, tamaño, si va o no dentro de un contenedor).\n\nOjo: en las tres, Inicio deja de ser una casita — ahora es un glifo distinto, porque la casa ya es Patrimonio. Los números son de ejemplo."
+      "text": "Tres opciones de layout para Inicio, Movimientos y Estrategias.\n\nLo que NO cambia: la paleta exacta de la app (mismos tokens oklch de globals.css), Instrument Serif para títulos, Work Sans para el resto, las mismas cifras de ejemplo, y el caballo de ajedrez en Estrategias + la casa en Patrimonio.\n\nLo que cambia: la estructura de cada pantalla, el tratamiento de la iconografía (grosor, tamaño, si va o no dentro de un contenedor) y cuánta información cabe. Ojo al comparar: C muestra más datos a propósito — desglose de 4 categorías en vez de una, más movimientos, totales por día — así que no es una comparación uno a uno con A y B.\n\nEn las tres, Inicio deja de ser una casita: ahora es un glifo distinto, porque la casa ya es Patrimonio. Los montos son de ejemplo."
     },
     {
       "id": "opcion-a",
