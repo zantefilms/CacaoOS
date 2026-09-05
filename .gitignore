@@ -1,1 +1,4 @@
+# Canvas de diseño ya "sembrados" (~2.5 MB cada uno: traen el editor
+# completo embebido). Se regeneran desde los .dc.html + canvas.json.
 design/cacao-pantallas-v1.html
+design/v2/cacao-layouts-premium.html

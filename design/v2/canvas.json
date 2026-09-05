@@ -1,0 +1,46 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "A · Inicio", "x": 0, "y": 0, "w": 390, "h": 844 },
+    { "file": "AMovimientos.dc.html", "title": "A · Movimientos", "x": 480, "y": 0, "w": 390, "h": 844 },
+    { "file": "AEstrategias.dc.html", "title": "A · Estrategias", "x": 960, "y": 0, "w": 390, "h": 844 },
+
+    { "file": "BInicio.dc.html", "title": "B · Inicio", "x": 0, "y": 1000, "w": 390, "h": 844 },
+    { "file": "BMovimientos.dc.html", "title": "B · Movimientos", "x": 480, "y": 1000, "w": 390, "h": 844 },
+    { "file": "BEstrategias.dc.html", "title": "B · Estrategias", "x": 960, "y": 1000, "w": 390, "h": 844 },
+
+    { "file": "CInicio.dc.html", "title": "C · Inicio", "x": 0, "y": 2000, "w": 390, "h": 844 },
+    { "file": "CMovimientos.dc.html", "title": "C · Movimientos", "x": 480, "y": 2000, "w": 390, "h": 844 },
+    { "file": "CEstrategias.dc.html", "title": "C · Estrategias", "x": 960, "y": 2000, "w": 390, "h": 844 }
+  ],
+  "annotations": [
+    {
+      "id": "resumen",
+      "x": 0,
+      "y": -230,
+      "w": 1350,
+      "text": "Tres opciones de layout para Inicio, Movimientos y Estrategias.\n\nLo que NO cambia entre opciones: la paleta exacta de la app (mismos tokens oklch de globals.css), Instrument Serif para títulos, Work Sans para el resto, el mismo contenido de cada pantalla, y el caballo de ajedrez en Estrategias + la casa en Patrimonio.\n\nLo que cambia: la estructura de cada pantalla y el tratamiento de la iconografía (grosor, tamaño, si va o no dentro de un contenedor).\n\nOjo: en las tres, Inicio deja de ser una casita — ahora es un glifo distinto, porque la casa ya es Patrimonio. Los números son de ejemplo."
+    },
+    {
+      "id": "opcion-a",
+      "x": -470,
+      "y": 40,
+      "w": 400,
+      "text": "OPCIÓN A — Editorial\n\nSin tarjetas: todo vive sobre el fondo crema, separado por líneas de 1px. Los números van en Instrument Serif y bien grandes. Iconos de línea muy delgada (1.25px), a 22px, sin contenedor. Barra inferior plana, sin botón flotante.\n\nA favor: la más tranquila y \"cara\" de las tres; deja respirar los números y se siente editorial.\n\nEn contra: con muchos movimientos se lee menos estructurada, y registrar un gasto pierde protagonismo al no haber botón +."
+    },
+    {
+      "id": "opcion-b",
+      "x": -470,
+      "y": 1040,
+      "w": 400,
+      "text": "OPCIÓN B — Tarjetas suaves\n\nGrupos redondeados (radio 22–24) sobre crema, con sombra muy suave y sin bordes. Cada icono va dentro de un círculo tintado (café o verde según el tipo). Los números pasan a Work Sans y la serif se reserva para los títulos. Botón + flotante y anillos de progreso en Metas.\n\nA favor: la más cálida y fácil de escanear; el + siempre a la mano; los círculos de color ayudan a reconocer categorías de un vistazo.\n\nEn contra: cabe menos información por pantalla, y las sombras hay que cuidarlas para que no se sienta pesado."
+    },
+    {
+      "id": "opcion-c",
+      "x": -470,
+      "y": 2040,
+      "w": 400,
+      "text": "OPCIÓN C — Datos primero\n\nDensa y tabular: bordes de 1px en vez de sombras, números alineados, control segmentado arriba, totales por día y ejes en la gráfica. Los iconos bajan a 19px y en las listas se sustituyen por puntos de color por categoría — el dato manda, el icono acompaña.\n\nA favor: ves mucho más de un vistazo (top de categorías con %, totales por día, ejes reales).\n\nEn contra: es la menos suave de las tres; se parece más a Apple Stocks que a Apple Wallet."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}
